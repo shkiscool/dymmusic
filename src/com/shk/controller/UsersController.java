@@ -220,7 +220,7 @@ public class UsersController extends HttpServlet {
 		String userPwd = request.getParameter("userPwd");
 		// 调用userService的方法
 		Users u = us.login(userName, userPwd);
-		if (u.getUSER_LEVEL() == 2) {
+		if (u.getUSERLEVEL() == 2) {
 			// 将用户信息存储在session对象中
 			session.setAttribute("users", u);
 			// 转发到用户后台
