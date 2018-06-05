@@ -9,7 +9,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import com.shk.entity.mUser;
+import com.shk.entity.Users;
 import com.shk.service.usersService;
 import com.shk.serviceImpl.usersServiceImpl;
 import com.shk.util.PageData;
@@ -87,7 +87,7 @@ public class UsersController extends HttpServlet {
 		if (null != userEmail) {
 			USER_EMAIL = userEmail;
 		}
-		mUser users = new mUser(USER_ID, USER_NAME, USER_PASSWORD, USER_LEVEL, USER_EMAIL, USER_LOVE, USER_PHOTO);
+		Users users = new Users(USER_ID, USER_NAME, USER_PASSWORD, USER_LEVEL, USER_EMAIL, USER_LOVE, USER_PHOTO);
 		boolean flag = us.updateUsers(users);
 		PrintWriter out = response.getWriter();
 		if (flag) {
@@ -125,7 +125,7 @@ public class UsersController extends HttpServlet {
 	 */
 	protected void doAdd(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		PageData<mUser> pd = us.getUsers(1, 1, "");
+		PageData<Users> pd = us.getUsers(1, 1, "");
 		int USER_ID = pd.getTotal() + 1;  //从用户表中获取用户的总数然后加一变成新加用户的编号（有缺陷，中间不能隔断）
 		String USER_PHOTO = "";  //用户照片的链接地址
 		String USER_LOVE = "";  //用户的音乐喜好
@@ -151,7 +151,7 @@ public class UsersController extends HttpServlet {
 		if (null != userEmail) {
 			USER_EMAIL = userEmail;
 		}
-		mUser users = new mUser(USER_ID, USER_NAME, USER_PWD, USER_LEVEL, USER_EMAIL, USER_LOVE, USER_PHOTO);
+		Users users = new Users(USER_ID, USER_NAME, USER_PWD, USER_LEVEL, USER_EMAIL, USER_LOVE, USER_PHOTO);
 		boolean flag = us.addUsers(users);
 		PrintWriter out = response.getWriter();
 		if (flag) {
@@ -194,7 +194,7 @@ public class UsersController extends HttpServlet {
 			userNameLike = request.getParameter("userNameLike");
 		}
 
-		PageData<mUser> pd = us.getUsers(page, pagesize, userNameLike);
+		PageData<Users> pd = us.getUsers(page, pagesize, userNameLike);
 
 		request.setAttribute("pd", pd);
 
@@ -219,7 +219,7 @@ public class UsersController extends HttpServlet {
 		String userName = request.getParameter("userName");
 		String userPwd = request.getParameter("userPwd");
 		// 调用userService的方法
-		mUser u = us.login(userName, userPwd);
+		Users u = us.login(userName, userPwd);
 		if (u.getUSER_LEVEL() == 2) {
 			// 将用户信息存储在session对象中
 			session.setAttribute("users", u);
@@ -243,7 +243,7 @@ public class UsersController extends HttpServlet {
 	 */
 	protected void doSign(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		PageData<mUser> pd = us.getUsers(1, 1, "");
+		PageData<Users> pd = us.getUsers(1, 1, "");
 		int USER_ID = pd.getTotal() + 1;   //从用户表中获取用户的总数然后加一变成新加用户的编号（有缺陷，中间不能隔断）
 		int USER_LEVEL = 1;  //用户权限（一般默认为普通用户，这句其实是多余的~~）
 		String USER_LOVE = "";  //注册界面没有该窗口所以为空
@@ -255,7 +255,7 @@ public class UsersController extends HttpServlet {
 		if (null != userEmail) {
 			USER_EMAIL = userEmail;
 		}
-		mUser users = new mUser(USER_ID, USER_NAME, USER_PWD, USER_LEVEL, USER_EMAIL, USER_LOVE, USER_PHOTO);
+		Users users = new Users(USER_ID, USER_NAME, USER_PWD, USER_LEVEL, USER_EMAIL, USER_LOVE, USER_PHOTO);
 
 		boolean flag = us.addUsers(users);  //执行增加操作
 
@@ -277,7 +277,7 @@ public class UsersController extends HttpServlet {
 		PrintWriter out = response.getWriter();
 		if ("au".equals(ap)) {   //当ap=au时，执行查询操作，判断用户名在数据库中是否存在
 			String username = request.getParameter("username");
-			mUser uss = us.getUserByName(username);
+			Users uss = us.getUserByName(username);
 			if (null != uss) {
 				out.print("用户名已存在！");
 			}
@@ -290,7 +290,7 @@ public class UsersController extends HttpServlet {
 		} else if ("login".equals(ap)) {  //当ap=login时，执行登录操作，判断用户名和密码是否正确
 			String userName = request.getParameter("userName");
 			String userPwd = request.getParameter("userPwd");
-			mUser u = us.login(userName, userPwd);
+			Users u = us.login(userName, userPwd);
 			if (null == u) {
 				out.print("用户名或密码错误！");
 			}

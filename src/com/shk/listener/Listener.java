@@ -8,7 +8,7 @@ import javax.servlet.http.HttpSession;
 import javax.servlet.http.HttpSessionAttributeListener;
 import javax.servlet.http.HttpSessionBindingEvent;
 
-import com.shk.entity.mUser;
+import com.shk.entity.Users;
 
 /**
  * 用户的监听器（防止用户重复登录）
@@ -40,7 +40,7 @@ public class Listener implements HttpSessionAttributeListener {
          // TODO Auto-generated method stub
     	if (se.getName().equals(SESSION_LOGIN_NAME)) {  
     		  
-    		mUser u = (mUser) se.getValue();  
+    		Users u = (Users) se.getValue();  
             HttpSession session = loginUser.remove(u.getUSER_NAME());  
             if (session != null) {  
                 session.removeAttribute("users");  
@@ -58,7 +58,7 @@ public class Listener implements HttpSessionAttributeListener {
          // TODO Auto-generated method stub
     	if (se.getName().equals(SESSION_LOGIN_NAME)) {  
             try {  
-            	mUser u = (mUser) se.getSession().getAttribute("users");  
+            	Users u = (Users) se.getSession().getAttribute("users");  
                 loginUser.remove(u.getUSER_NAME());  
             } catch (Exception e) {  
                   
@@ -75,7 +75,7 @@ public class Listener implements HttpSessionAttributeListener {
          // TODO Auto-generated method stub
     	if (se.getName().equals(SESSION_LOGIN_NAME)) {  
     		  
-    		mUser u = (mUser) se.getValue();  
+    		Users u = (Users) se.getValue();  
             loginUser.remove(u.getUSER_NAME());   
             loginUser.put(u.getUSER_NAME(), se.getSession());  
         }  
