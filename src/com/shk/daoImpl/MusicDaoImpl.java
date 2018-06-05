@@ -23,6 +23,7 @@ public class MusicDaoImpl implements MusicDao {
 	public List<Music> queryAllMusic() {
 		// TODO Auto-generated method stub
 		List<Music> list = (List<Music>) DBUtil.select("select MID \"mId\",TID \"tId\",SINGERID \"singerId\",MNAME \"mName\",MURL \"mUrl\",MCOUNT \"mCount\",MLYRIC \"mLyric\",MDATE \"mDate\",MIMG \"mImg\",SINGERNAME \"singerName\",MTIME \"mTime\" from MUSIC where mId = 32084464", Music.class);
+
 		return list;
 	}
 

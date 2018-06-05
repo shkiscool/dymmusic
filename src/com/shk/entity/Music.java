@@ -31,6 +31,7 @@ public class Music {
 		// TODO Auto-generated constructor stub
 	}
 
+
 	public Music(int mId, int tId, int sigerId, String mName, String mUrl, int mCount, Clob mLyric, String mDate,
 			String mImg, String singerName, String mTime) {
 		super();

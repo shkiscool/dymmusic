@@ -1,6 +1,6 @@
 package com.shk.test;
 
-import com.shk.entity.mUser;
+import com.shk.entity.Users;
 import com.shk.service.usersService;
 import com.shk.serviceImpl.usersServiceImpl;
 
@@ -11,7 +11,7 @@ public class Test {
 
 		usersService us = new usersServiceImpl();
 		
-		mUser u = us.login("Ð¡°×", "qaz123");
+		Users u = us.login("Ð¡°×", "qaz123");
 		
 		System.out.println(u);
 	}
